@@ -37,8 +37,8 @@ namespace Mc2.CrudTest.Application.Customers.Commands
                 .MaximumLength(320).WithMessage("Email must not exceed 320 characters.")
                 .MustAsync(BeUniqueEmail).WithMessage("The specified email already exists.");
 
-            //RuleFor(v => v)
-            //    .MustAsync(BeUniqueInfo).WithMessage("The specified FirstName, LastName and DateOfBirth is duplicated.");
+            RuleFor(v => v)
+                .MustAsync(BeUniqueInfo).WithMessage("Customer By this Firstname, Lastname and DateOfBirth already exists.");
         }
 
         public async Task<bool> BeUniqueEmail(string email, CancellationToken cancellationToken)
@@ -49,9 +49,11 @@ namespace Mc2.CrudTest.Application.Customers.Commands
 
         public async Task<bool> BeUniqueInfo(CreateCustomerCommand customer, CancellationToken cancellationToken)
         {
-            return await _context.Customers
-                .AllAsync(c => c.FirstName != customer.FirstName && c.LastName != customer.LastName
-                    && c.DateOfBirth != customer.DateOfBirth, cancellationToken);
+            
+            var result = await _context.Customers
+                .AnyAsync(c => c.FirstName == customer.FirstName && c.LastName == customer.LastName
+                    && c.DateOfBirth == customer.DateOfBirth, cancellationToken);
+            return !result;
         }
 
         public bool BeValidPhoneNumber(string phone)

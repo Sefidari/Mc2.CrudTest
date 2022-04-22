@@ -1,6 +1,7 @@
 ﻿@page "/customer/create"
 @inject HttpClient http
 @inject NavigationManager uriHelper
+@inject IJSRuntime js
 
 <h3>Create</h3>
 
@@ -14,7 +15,11 @@
 
         var response = await http.PostAsJsonAsync("api/customer", cust);
         //uriHelper.NavigateTo("customer");
-        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        if (response.StatusCode != System.Net.HttpStatusCode.OK)
+        {
+           await js.InvokeVoidAsync("alert", $"Invalid Data, Check Request Response!");
+        }
+        else
         {
             uriHelper.NavigateTo("customer");
         }

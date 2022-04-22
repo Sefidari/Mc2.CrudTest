@@ -35,8 +35,8 @@ namespace Mc2.CrudTest.Application.Customers.Commands
                 .MaximumLength(320).WithMessage("Email must not exceed 320 characters.")
                 .MustAsync(BeUniqueEmail).WithMessage("The specified email already exists.");
 
-            //RuleFor(v => v)
-            //    .MustAsync(BeUniqueInfo).WithMessage("The specified FirstName, LastName and DateOfBirth is duplicated.");
+            RuleFor(v => v)
+                .MustAsync(BeUniqueInfo).WithMessage("Customer By this Firstname, Lastname and DateOfBirth already exists.");
         }
 
         public async Task<bool> BeUniqueEmail(UpdateCustomerCommand customer, string email, CancellationToken cancellationToken)
@@ -48,10 +48,11 @@ namespace Mc2.CrudTest.Application.Customers.Commands
 
         public async Task<bool> BeUniqueInfo(UpdateCustomerCommand customer, CancellationToken cancellationToken)
         {
-            return await _context.Customers
+            var result = await _context.Customers
                 .Where(c => c.Id != customer.Id)
-                .AllAsync(c => c.FirstName != customer.FirstName && c.LastName != customer.LastName
-                    && c.DateOfBirth != customer.DateOfBirth, cancellationToken);
+                .AnyAsync(c => c.FirstName == customer.FirstName && c.LastName == customer.LastName
+                    && c.DateOfBirth == customer.DateOfBirth, cancellationToken);
+            return !result;
         }
 
         public bool BeValidPhoneNumber(string phone)
@@ -61,7 +62,7 @@ namespace Mc2.CrudTest.Application.Customers.Commands
             PhoneNumberUtil phoneUtil = PhoneNumberUtil.GetInstance();
             try
             {
-                string countryCode = "US";
+                string countryCode = "PK";
                 PhoneNumbers.PhoneNumber phoneNumber = phoneUtil.Parse(phone, countryCode);
 
                 //bool isMobile = false;
@@ -85,7 +86,8 @@ namespace Mc2.CrudTest.Application.Customers.Commands
             }
             catch (NumberParseException ex)
             {
-                string errorMessage = "NumberParseException was thrown: " + ex.Message.ToString();
+                //string errorMessage = "NumberParseException was thrown: " + ex.Message.ToString();
+                isValidNumber = false;
             }
             return isValidNumber;
         }
