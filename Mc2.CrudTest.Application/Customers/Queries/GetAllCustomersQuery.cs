@@ -29,13 +29,6 @@ namespace Mc2.CrudTest.Application.Customers.Queries
                     return null;
                 }
                 return customerList.AsReadOnly();
-
-                    //        return await _context.Customers
-                    //.AsNoTracking()
-                    //.ProjectTo<CustomerVM>(_mapper.ConfigurationProvider)
-                    //.OrderBy(t => t.LastName)
-                    //.ToListAsync(cancellationToken);
-                    //
             }
         }
     }

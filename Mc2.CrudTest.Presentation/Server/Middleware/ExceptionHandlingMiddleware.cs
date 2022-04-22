@@ -65,18 +65,6 @@ namespace Mc2.CrudTest.Presentation.Server.Middleware
                 _ => "Server Error"
             };
 
-        //private static IReadOnlyDictionary<string, string[]> GetErrors(Exception exception)
-        //{
-        //    IReadOnlyDictionary<string, string[]> errors = null;
-
-        //    if (exception is ValidationException validationException)
-        //    {
-        //        errors = validationException.ErrorsDictionary;
-        //    }
-
-        //    return errors;
-        //}
-
         private static IDictionary<string, string[]> GetErrors(Exception exception)
         {
             IDictionary<string, string[]> errors = null;

@@ -3,10 +3,7 @@ using Mc2.CrudTest.Application.Interfaces;
 using Mc2.CrudTest.Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -25,7 +22,6 @@ namespace Mc2.CrudTest.Application.Customers.Commands
             public async Task<int> Handle(DeleteCustomerByIdCommand request, CancellationToken cancellationToken)
             {
                 var customer = await _context.Customers.Where(a => a.Id == request.Id).FirstOrDefaultAsync();
-                //if (customer == null) return default;
 
                 if (customer == null)
                 {
@@ -35,7 +31,6 @@ namespace Mc2.CrudTest.Application.Customers.Commands
                 _context.Customers.Remove(customer);
                 await _context.SaveChangesAsync(cancellationToken);
                 return customer.Id;
-                //return Unit.Value;
             }
         }
     }

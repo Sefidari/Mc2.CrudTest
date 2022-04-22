@@ -66,28 +66,11 @@ namespace Mc2.CrudTest.Application.Customers.Commands
                 string countryCode = "PK";
                 PhoneNumbers.PhoneNumber phoneNumber = phoneUtil.Parse(phone, countryCode);
 
-                //bool isMobile = false;
-                isValidNumber = phoneUtil.IsValidNumber(phoneNumber); // returns true for valid number    
-
-                // returns trueor false w.r.t phone number region  
-                //bool isValidRegion = phoneUtil.IsValidNumberForRegion(phoneNumber, countryCode);
-
-                //string region = phoneUtil.GetRegionCodeForNumber(phoneNumber); // GB, US , PK    
-
-                //var numberType = phoneUtil.GetNumberType(phoneNumber); // Produces Mobile , FIXED_LINE    
-
-                //string phoneNumberType = numberType.ToString();
-
-                //if (!string.IsNullOrEmpty(phoneNumberType) && phoneNumberType == "MOBILE")
-                //{
-                //    isMobile = true;
-                //}
-
-                //var originalNumber = phoneUtil.Format(phoneNumber, PhoneNumberFormat.E164); // Produces "+923336323997"    
+                isValidNumber = phoneUtil.IsValidNumber(phoneNumber); // returns true for valid number     
             }
             catch (NumberParseException ex)
             {
-                string errorMessage = "NumberParseException was thrown: " + ex.Message.ToString();
+                isValidNumber = false;
             }
             return isValidNumber;
         }

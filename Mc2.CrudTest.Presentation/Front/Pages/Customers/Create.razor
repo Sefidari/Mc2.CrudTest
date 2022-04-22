@@ -12,9 +12,7 @@
     Customer cust = new Customer();
     async Task CreateCustomer()
     {
-
         var response = await http.PostAsJsonAsync("api/customer", cust);
-        //uriHelper.NavigateTo("customer");
         if (response.StatusCode != System.Net.HttpStatusCode.OK)
         {
            await js.InvokeVoidAsync("alert", $"Invalid Data, Check Request Response!");
@@ -23,13 +21,5 @@
         {
             uriHelper.NavigateTo("customer");
         }
-        //if (response.StatusCode != System.Net.HttpStatusCode.Created)
-        //{
-        //    //serverValidator.Validate(response, testModel);
-        //}
-        //else
-        //{
-        //    uriHelper.NavigateTo("customer");
-        //}
     }
 }

@@ -25,17 +25,10 @@
         if (response.StatusCode != System.Net.HttpStatusCode.OK)
         {
             await js.InvokeVoidAsync("alert", $"Invalid Data, Check Request Response!");
-            //if (!response.IsSuccessStatusCode)
-            //{
-            //   var body = await response.Content.ReadAsStringAsync();
-
-            //}
         }
         else{
             await js.InvokeVoidAsync("alert", $"Updated Successfully!");
             uriHelper.NavigateTo("customer");
         }
-
-
     }
 }

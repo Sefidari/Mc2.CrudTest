@@ -60,14 +60,6 @@ namespace Mc2.CrudTest.Presentation.Server.Filters
             };
             context.Result = new BadRequestObjectResult(details);
 
-            //string dictionaryString = "";
-            //foreach (KeyValuePair<string, string[]> keyValues in details.Errors)
-            //{
-            //    dictionaryString += keyValues.Key + " : " + string.Join(" ", keyValues.Value) + ", ";
-            //}
-
-            //context.Result = new BadRequestObjectResult(dictionaryString);
-
             context.ExceptionHandled = true;
         }
 

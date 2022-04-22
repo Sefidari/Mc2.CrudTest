@@ -26,13 +26,6 @@ namespace Mc2.CrudTest.Application.Customers.Queries
                 var customer = await _context.Customers.Where(a => a.Id == query.Id).FirstOrDefaultAsync();
                 if (customer == null) return null;
                 return customer;
-
-        //        return await _context.Customers
-        //.Where(c => c.Id == request.Id)
-        //.AsNoTracking()
-        //.ProjectTo<CustomerVM>(_mapper.ConfigurationProvider)
-        //.OrderBy(t => t.LastName)
-        //.FirstOrDefaultAsync(cancellationToken);
             }
         }
     }

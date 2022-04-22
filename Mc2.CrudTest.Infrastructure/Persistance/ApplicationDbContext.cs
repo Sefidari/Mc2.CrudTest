@@ -18,8 +18,6 @@ namespace Mc2.CrudTest.Infrastructure.Persistance
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<Customer>().Property(p => p.Rate).HasColumnType("decimal(10, 2)");
-
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Customer> Customers { get; set; }
