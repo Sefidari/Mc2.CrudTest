@@ -1,0 +1,30 @@
+﻿@page "/customer/create"
+@inject HttpClient http
+@inject NavigationManager uriHelper
+
+<h3>Create</h3>
+
+<Form ButtonText="Create Customer" cust="@cust"
+            OnValidSubmit="@CreateCustomer" />
+
+@code {
+    Customer cust = new Customer();
+    async Task CreateCustomer()
+    {
+
+        var response = await http.PostAsJsonAsync("api/customer", cust);
+        //uriHelper.NavigateTo("customer");
+        if (response.StatusCode == System.Net.HttpStatusCode.OK)
+        {
+            uriHelper.NavigateTo("customer");
+        }
+        //if (response.StatusCode != System.Net.HttpStatusCode.Created)
+        //{
+        //    //serverValidator.Validate(response, testModel);
+        //}
+        //else
+        //{
+        //    uriHelper.NavigateTo("customer");
+        //}
+    }
+}

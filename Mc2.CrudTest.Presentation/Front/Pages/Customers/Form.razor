@@ -1,0 +1,86 @@
+﻿@inject NavigationManager uriHelper
+
+<EditForm Model="@cust" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+
+    <div class="form-group">
+        <div class="mb-3">
+            <label class="form-label">First Name :</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="@cust.FirstName" />
+                <ValidationMessage For="@(() => cust.FirstName)" />
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <label class="form-label">Last Name :</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="@cust.LastName" />
+                <ValidationMessage For="@(() => cust.LastName)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <label class="form-label">Date Of Birth :</label>
+            <div class="col-md-4">
+                <InputDate class="form-control" @bind-Value="@cust.DateOfBirth" />
+                <ValidationMessage For="@(() => cust.DateOfBirth)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <label class="form-label">Phone Number :</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="@cust.PhoneNumber" />
+                <ValidationMessage For="@(() => cust.PhoneNumber)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <label class="form-label">Email :</label>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="@cust.Email" />
+                <ValidationMessage For="@(() => cust.Email)" />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="mb-3">
+            <label class="form-label">Bank Account Number :</label>
+            <span>(example: 5105105105105100, 4012888888881881, 4111111111111111, 5555555555554444)</span>
+            <div class="col-md-4">
+                <InputText class="form-control" @bind-Value="@cust.BankAccountNumber" />
+                <ValidationMessage For="@(() => cust.BankAccountNumber)" />
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-success">
+            @ButtonText
+        </button>
+        <button type="submit" value="Cancel" @onclick="(() => Cancel())" class="btn btn-info" >
+            Cancel
+        </button>
+    </div>
+
+
+
+</EditForm>
+
+
+@code {
+    [Parameter] public Customer cust { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+
+    void Cancel()
+    {
+       uriHelper.NavigateTo("customer");
+    }
+}
