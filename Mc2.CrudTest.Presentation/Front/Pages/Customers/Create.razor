@@ -15,7 +15,7 @@
         var response = await http.PostAsJsonAsync("api/customer", cust);
         if (response.StatusCode != System.Net.HttpStatusCode.OK)
         {
-           await js.InvokeVoidAsync("alert", $"Invalid Data, Check Request Response!");
+           await js.InvokeVoidAsync("alert", $"Invalid Data!");
         }
         else
         {
